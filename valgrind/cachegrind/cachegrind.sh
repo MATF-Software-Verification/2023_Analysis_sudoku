@@ -8,7 +8,6 @@ KCACHEGRIND=false
 
 OUTPUT_FILE="cachegrind_$(date +%s).out"
 
-# Path to your sudoku executable
 SUDOKU_BIN="../../sudoku/sudoku"
 
 if [ $# -lt 0 ]; then
