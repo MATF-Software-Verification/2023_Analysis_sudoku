@@ -3,7 +3,7 @@
 U ovom direktorijumu nalazi se uputstvo i skripte za pokretanje clang-format nad projektom Sudoku.  
 Clang-Format automatski formatira C/C++ kod prema definisanom stilu, sto pomaže u odrzavanju konzistentnog i preglednog koda.
 
-Vise informacija o alatu i detaljima analize mozete naci u [ProjectAnalysisReport.md](../ProjectAnalisysReport.md).
+Vise informacija o alatu i detaljima analize mozete naci u [ProjectAnalysisReport.md](../ProjectAnalysisReport.md).
 
 ## Preduslovi
 
@@ -52,3 +52,4 @@ Pokretanjem skripte:
 - Originalni fajlovi u `../sudoku` biće formatirani prema stilu definisanom u `.clang-format` ili po default stilu.
 - Diff prikazuje promene pre nego što se primene, tako da možete videti razlike.
 - Ovim procesom kod postaje konzistentan i pregledan, sto olakšava dalji razvoj i analizu.
+
