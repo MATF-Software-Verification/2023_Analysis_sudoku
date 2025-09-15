@@ -5,7 +5,6 @@ PROJECT_DIR="$(dirname "$0")/../../sudoku"
 
 CLEAN=false
 
-# Parse optional argument
 if [ "$1" = "clean" ]; then
     CLEAN=true
 fi
