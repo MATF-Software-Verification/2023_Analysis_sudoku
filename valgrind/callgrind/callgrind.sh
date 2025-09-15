@@ -8,15 +8,12 @@ KCACHEGRIND=false
 
 OUTPUT_FILE="callgrind_$(date +%s).out"
 
-# Path to your sudoku executable
 SUDOKU_BIN="../../sudoku/sudoku"
 
-# If no arguments, just run callgrind
 if [ $# -eq 0 ]; then
     echo "Pokrećem samo alat callgrind."
 fi
 
-# Parse arguments
 if { [ "$1" = "-a" ] && [ "$2" = "-k" ]; } || { [ "$1" = "-k" ] && [ "$2" = "-a" ]; };; then
     ANNOTATE=true
     KCACHEGRIND=true
