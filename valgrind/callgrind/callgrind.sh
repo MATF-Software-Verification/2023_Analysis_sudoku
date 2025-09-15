@@ -2,7 +2,6 @@
 
 set -e
 
-# Default options
 ANNOTATE=false
 KCACHEGRIND=false
 
