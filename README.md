@@ -24,7 +24,7 @@ U analizi su korišćeni sledeći alati:
     Alati za statičku analizu:
         -Clang-Format
         -Cppcheck
-    Alati za dinamičku analizu (Valgrind):
+    Alati za dinamičku analizu:
         -Callgrind
         -Cachegrind
         -Lcov
