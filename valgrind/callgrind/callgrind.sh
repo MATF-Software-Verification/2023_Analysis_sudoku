@@ -13,7 +13,7 @@ if [ $# -eq 0 ]; then
     echo "Pokrećem samo alat callgrind."
 fi
 
-if { [ "$1" = "-a" ] && [ "$2" = "-k" ]; } || { [ "$1" = "-k" ] && [ "$2" = "-a" ]; };; then
+if { [ "$1" = "-a" ] && [ "$2" = "-k" ]; } || { [ "$1" = "-k" ] && [ "$2" = "-a" ]; }; then
     ANNOTATE=true
     KCACHEGRIND=true
 elif [ "$1" = "-k" ]; then
