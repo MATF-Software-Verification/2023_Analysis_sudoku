@@ -27,7 +27,7 @@ U analizi su korišćeni sledeći alati:
     Alati za dinamičku analizu (Valgrind):
         -Callgrind
         -Cachegrind
-        -
+        -Lcov
 
 Detaljniji opis svakog alata nalazi se u dokumentu ProjectAnalysisReport.md.
 
