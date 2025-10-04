@@ -36,6 +36,41 @@ Iako je deo koda već dobro organizovan, veći deo fajlova još uvek nije unifor
 
 ## Cppcheck
 
+Cppcheck je statički analizator koda za C i C++ koji pronalazi greške u kodu, potencijalne bugove i sigurnosne probleme **bez pokretanja programa**. Za razliku od kompajlera, Cppcheck se fokusira na **logičke i stilističke greške**, uključujući nedefinisano ponašanje, curenje memorije i lošu praksu kodiranja.
+
+### Efekti primene na projekat
+
+![Cppcheck_report.png](cppcheck/Cppcheck_report.png)
+
+1. **Variable 'method' is assigned a value that is never used**  
+   - Promenljiva `method` dobija vrednost koja se nigde dalje ne koristi.  
+   - Ova situacija može ukazivati na nepotreban kod ili grešku u logici, pa je preporučljivo ukloniti ili koristiti promenljivu.
+
+2. **Local variable 'solve' shadows outer function**  
+   - Lokalna promenljiva `solve` ima isto ime kao spoljašnja funkcija ili promenljiva u višem opsegu.  
+   - To može dovesti do zabune i neočekivanih rezultata, preporučuje se da se promeni ime lokalne promenljive.
+
+3. **Variable 'val' is assigned a value that is never used**  
+   - Promenljiva `val` dobija vrednost koja se nikada ne koristi.  
+   - Ovaj problem je indikator mrtvog koda koji može biti uklonjen ili revidiran.
+
+4. **The scope of the variable 'x' can be reduced**  
+   - Promenljiva `x` je definisana u širem opsegu nego što je potrebno.  
+   - Preporučuje se da se njen opseg smanji na minimum kako bi kod bio čitljiviji i smanjio mogućnost grešaka.
+
+5. **Class 'Board' has a constructor with 1 argument that is not explicit**  
+   - Konstruktor klase `Board` sa jednim argumentom nije označen kao `explicit`.  
+   - To može dovesti do implicitnih konverzija i neočekivanog ponašanja.  
+   - Rešenje: dodati `explicit` ispred konstruktora:
+
+6. **Class 'Board' does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s)**  
+   - Klasa `Board` koristi dinamičku memoriju ili resurse, ali nema definisan copy constructor.  
+   - Bez copy konstruktora kopiranje objekata može dovesti do **deep copy** problema ili curenja memorije.  
+   - Rešenje: implementirati copy constructor i, po potrebi, operator dodele (`operator=`).
+
+### Zakljucak     
+Analiza pomoću Cppcheck-a nam je omogućila da identifikujemo **mrtvi kod, potencijalne greške u logici, problematične opsege promenljivih i rizike vezane za upravljanje memorijom**. Popravljanje ovih problema povećava kvalitet i stabilnost koda i smanjuje rizik od runtime grešaka.
+
 ## Valgrind
 
 ## Cachegrind 
