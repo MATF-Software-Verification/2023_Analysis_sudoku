@@ -49,3 +49,9 @@ Ako koristite `-k`, otvoriće se KCachegrind GUI za vizuelnu analizu.
 Kada ste zavrsili sa analizom projekta pokrenite:
 
 ./build.sh clean
+
+Ako želite da obrišete prethodne izveštaje:
+
+```bash
+rm *.out
+```

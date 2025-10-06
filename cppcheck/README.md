@@ -60,5 +60,6 @@ Ako želite da obrišete prethodne izveštaje:
 
 ```bash
 rm cppcheck_*.txt
+rm cppcheck_*.xml
 rm -r html-report
 ```

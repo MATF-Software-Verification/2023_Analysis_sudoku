@@ -12,6 +12,7 @@ fi
 if [ "$CLEAN" = true ]; then
     echo "Čistim stari build..."
     make -C "$PROJECT_DIR" clean
+    exit 0
 fi
 
 echo "Pokrecem sudoku projekat..."
