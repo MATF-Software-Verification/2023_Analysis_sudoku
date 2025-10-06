@@ -76,6 +76,37 @@ Analiza pomoću Cppcheck-a nam je omogućila da identifikujemo **mrtvi kod, pote
 ## Cachegrind 
 
 ## Callgrind
+Callgrind je alat iz skupa Valgrind alata namenjen **profilisanju programa**, odnosno merenju performansi kroz broj izvršenih instrukcija, poziva funkcija i pristupa memoriji. Koristi se za **analizu efikasnosti koda** i identifikaciju delova koji najviše troše resurse. Rezultati se obično pregledaju u **KCachegrind** interfejsu, koji omogućava vizuelni prikaz poziva funkcija i njihovog učešća u ukupnom izvršavanju programa.
+
+### Efekti primene Callgrind alata na projekat
+
+**1. Šta je Callgrind i kako funkcioniše**  
+Callgrind je alat iz Valgrind okvira koji služi za **profilisanje programa** — tj. za merenje koliko puta se izvršava određeni deo koda i koliko mašinskih instrukcija, funkcijskih poziva i memorijskih pristupa se obavlja.  
+Rezultati se obično analiziraju kroz **KCachegrind** grafički interfejs koji omogućava prikaz hijerarhije poziva funkcija, procentualnog učešća svake funkcije u ukupnom vremenu i broj instrukcija po funkciji.  
+
+**2. Analiza dobijenih rezultata**  
+![callgrind_kcachegrind.png](/valgrind/callgrind/callgrind_kcachegrind.png)
+- Funkcija `main()` zauzima **57.23% ukupnih instrukcija**, što znači da se u njoj odvija značajan deo izvršavanja logike programa.  
+- Unutar `main()` funkcije, najveći deo instrukcija odlazi na poziv funkcije `playGame(int, int)` iz fajla `game.cpp`, sa čak **56.83% instrukcija**.  
+- Ostale funkcije poput `solve(Board&, int, int)` i `generatePuzzle(int, int)` takođe doprinose ukupnom broju instrukcija, ali u manjoj meri.  
+- Veći deo vremena program provodi u **petljama i rekurzivnim pozivima** unutar funkcija koje sadrže algoritme za rešavanje Sudoku igre (`solver.cpp`, `game.cpp`).  
+- Uključene su i sistemske funkcije (`_start`, `__libc_start_call_main`, `ld`, `libstdc++`), koje se ne analiziraju direktno, ali čine osnovu izvršnog okruženja.
+
+**3. Tumačenje metrika**  
+- **Incl (Inclusive)** prikazuje ukupan procenat instrukcija koji uključuje i sve funkcije koje se pozivaju iz te funkcije.  
+- **Self** označava procenat instrukcija izvršenih isključivo u toj funkciji.  
+- **Ir (Instruction Read)** pokazuje koliko je instrukcija pročitano tokom izvršavanja.  
+- Korišćenjem ovih metrika moguće je identifikovati **uska grla (bottlenecks)** u kodu — delove koji najviše troše resurse i najviše utiču na performanse.
+
+**4. Praktični efekti na projekat**  
+Zahvaljujući Callgrind profajliranju, moguće je utvrditi koje funkcije imaju najveći uticaj na performanse Sudoku programa.  
+Na osnovu podataka, očigledno je da **glavna logika igre** (`playGame` i `solve`) dominira u izvršavanju i da bi eventualna optimizacija tih funkcija mogla doneti najveće poboljšanje brzine.  
+Ovo takođe ukazuje da je ostatak koda — poput inicijalizacije, ulaza/izlaza i poziva sistemskih biblioteka — relativno nebitan u pogledu performansi.
+
+## Zaključak
+
+Na osnovu analize u Callgrind alatu, uočeno je da se najveći deo vremena izvršavanja troši u funkciji `playGame(int, int)`, što ukazuje da se tu nalaze najintenzivniji delovi logike igre. Ovi podaci pomažu da se optimizuje kod identifikovanjem funkcija koje najviše opterećuju procesor i usporavaju rad programa.
+
 
 ## Lcov
 LCOV je alat za merenje i vizualizaciju pokrivenosti koda (code coverage) u C i C++ projektima. Koristi se u kombinaciji sa GCC instrumentacijom `--coverage flag` i `gcov` fajlovima, kako bi se prikazalo koji delovi koda su izvršeni tokom testiranja.
