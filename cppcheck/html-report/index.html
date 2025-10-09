@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cppcheck - HTML report - [project name]</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+
+    </style>
+    <script language="javascript">
+      function getStyle(el,styleProp) {
+        if (el.currentStyle)
+          var y = el.currentStyle[styleProp];
+        else if (window.getComputedStyle)
+          var y = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+        return y;
+      }
+      function toggle() {
+        var el = this.expandable_content;
+        var mark = this.expandable_marker;
+        if (el.style.display == "block") {
+          el.style.display = "none";
+          mark.innerHTML = "[+]";
+        } else {
+          el.style.display = "block";
+          mark.innerHTML = "[-]";
+        }
+      }
+      function init_expandables() {
+        var elts = document.getElementsByClassName("expandable");
+        for (var i = 0; i < elts.length; i++) {
+          var el = elts[i];
+          var clickable = el.getElementsByTagName("span")[0];
+          var marker = clickable.getElementsByClassName("marker")[0];
+          var content = el.getElementsByClassName("content")[0];
+          var width = clickable.clientWidth - parseInt(getStyle(content, "padding-left")) - parseInt(getStyle(content, "padding-right"));
+          content.style.width = width + "px";
+          clickable.expandable_content = content;
+          clickable.expandable_marker = marker;
+          clickable.onclick = toggle;
+        }
+      }
+      function set_class_display(c, st) {
+        var elements = document.querySelectorAll('.' + c),
+            len = elements.length;
+        for (i = 0; i < len; i++) {
+            elements[i].style.display = st;
+        }
+      }
+      function toggle_class_visibility(id) {
+        var box = document.getElementById(id);
+        set_class_display(id, box.checked ? '' : 'none');
+      }
+      function toggle_all(){
+        var elts = document.getElementsByTagName("input");
+        for (var i = 1; i < elts.length; i++) {           
+          var el = elts[i];
+          el.checked ? el.checked=false : el.checked=true;
+          toggle_class_visibility(el.id);        
+        }            
+      }
+
+    </script>
+  </head>
+  <body onload="init_expandables()">
+      <div id="header">
+        <h1>Cppcheck report - [project name]:  </h1>
+      </div>
+      <div id="menu_index">
+       <p id="filename"><a href="index.html">Defect summary;</a> </p>
+
+       <label><input type="checkbox" onclick="toggle_all()" checked> Toggle all</label>
+       <table>
+           <tr><th>Show</th><th>#</th><th>Defect ID</th></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='noCopyConstructor' name='noCopyConstructor' checked></td><td>6</td><td>noCopyConstructor</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='noExplicitConstructor' name='noExplicitConstructor' checked></td><td>6</td><td>noExplicitConstructor</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='noOperatorEq' name='noOperatorEq' checked></td><td>6</td><td>noOperatorEq</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='variableScope' name='variableScope' checked></td><td>4</td><td>variableScope</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='unreadVariable' name='unreadVariable' checked></td><td>3</td><td>unreadVariable</td></tr>
+            <tr><td><input type='checkbox' onclick='toggle_class_visibility(this.id)' id='shadowFunction' name='shadowFunction' checked></td><td>1</td><td>shadowFunction</td></tr>
+           <tr><td></td><td>26</td><td>total</td></tr>
+       </table>
+       <p><a href="stats.html">Statistics</a></p>
+      </div>
+      <div id="content_index">
+
+       <table>
+       <tr><th>Line</th><th>Id</th><th>CWE</th><th>Severity</th><th>Message</th></tr>
+       <tr><td colspan='5'><a href='1.html'>../sudoku/debug.cpp</a></td></tr>
+       <tr class="shadowFunction"><td><a href="1.html#line-20">20</a></td><td>shadowFunction</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >Local variable &apos;solve&apos; shadows outer function</td></tr>
+       <tr><td colspan='5'><a href='2.html'>../sudoku/main.cpp</a></td></tr>
+       <tr class="unreadVariable"><td><a href="2.html#line-24">24</a></td><td>unreadVariable</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >Variable &apos;method&apos; is assigned a value that is never used.</td></tr>
+       <tr class="unreadVariable"><td><a href="2.html#line-84">84</a></td><td>unreadVariable</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >Variable &apos;method&apos; is assigned a value that is never used.</td></tr>
+       <tr><td colspan='5'><a href='3.html'>../sudoku/solver.cpp</a></td></tr>
+       <tr class="unreadVariable"><td><a href="3.html#line-80">80</a></td><td>unreadVariable</td><td><a href='https://cwe.mitre.org/data/definitions/563.html'>563</a></td><td>style</td><td >Variable &apos;val&apos; is assigned a value that is never used.</td></tr>
+       <tr class="variableScope"><td><a href="3.html#line-261">261</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;x&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="3.html#line-261">261</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;y&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="3.html#line-284">284</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;rindex&apos; can be reduced.</td></tr>
+       <tr class="variableScope"><td><a href="3.html#line-285">285</a></td><td>variableScope</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >The scope of the variable &apos;temp&apos; can be reduced.</td></tr>
+       <tr><td colspan='5'><a href='0.html'>../sudoku/solver.hpp</a></td></tr>
+       <tr class="noExplicitConstructor"><td><a href="0.html#line-23">23</a></td><td>noExplicitConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >Class &apos;Board&apos; has a constructor with 1 argument that is not explicit.</td></tr>
+       <tr class="noExplicitConstructor"><td><a href="0.html#line-23">23</a></td><td>noExplicitConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >Class &apos;Board&apos; has a constructor with 1 argument that is not explicit.</td></tr>
+       <tr class="noExplicitConstructor"><td><a href="0.html#line-23">23</a></td><td>noExplicitConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >Class &apos;Board&apos; has a constructor with 1 argument that is not explicit.</td></tr>
+       <tr class="noExplicitConstructor"><td><a href="0.html#line-23">23</a></td><td>noExplicitConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >Class &apos;Board&apos; has a constructor with 1 argument that is not explicit.</td></tr>
+       <tr class="noExplicitConstructor"><td><a href="0.html#line-23">23</a></td><td>noExplicitConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >Class &apos;Board&apos; has a constructor with 1 argument that is not explicit.</td></tr>
+       <tr class="noExplicitConstructor"><td><a href="0.html#line-23">23</a></td><td>noExplicitConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>style</td><td >Class &apos;Board&apos; has a constructor with 1 argument that is not explicit.</td></tr>
+       <tr class="noCopyConstructor"><td><a href="0.html#line-26">26</a></td><td>noCopyConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noOperatorEq"><td><a href="0.html#line-26">26</a></td><td>noOperatorEq</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a operator= which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noCopyConstructor"><td><a href="0.html#line-26">26</a></td><td>noCopyConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noOperatorEq"><td><a href="0.html#line-26">26</a></td><td>noOperatorEq</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a operator= which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noCopyConstructor"><td><a href="0.html#line-26">26</a></td><td>noCopyConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noOperatorEq"><td><a href="0.html#line-26">26</a></td><td>noOperatorEq</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a operator= which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noCopyConstructor"><td><a href="0.html#line-26">26</a></td><td>noCopyConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noOperatorEq"><td><a href="0.html#line-26">26</a></td><td>noOperatorEq</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a operator= which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noCopyConstructor"><td><a href="0.html#line-26">26</a></td><td>noCopyConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noOperatorEq"><td><a href="0.html#line-26">26</a></td><td>noOperatorEq</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a operator= which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noCopyConstructor"><td><a href="0.html#line-26">26</a></td><td>noCopyConstructor</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a copy constructor which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       <tr class="noOperatorEq"><td><a href="0.html#line-26">26</a></td><td>noOperatorEq</td><td><a href='https://cwe.mitre.org/data/definitions/398.html'>398</a></td><td>warning</td><td >Class &apos;Board&apos; does not have a operator= which is recommended since it has dynamic memory/resource allocation(s).</td></tr>
+       </table>
+      </div>
+      <div id="footer">
+        <p>
+         Cppcheck 1.90 - a tool for static C/C++ code analysis</br>
+         </br>
+         Internet: <a href="http://cppcheck.net">http://cppcheck.net</a></br>
+         IRC: <a href="irc://irc.freenode.net/cppcheck">irc://irc.freenode.net/cppcheck</a></br>
+        </p>
+      </div>
+  </body>
+</html>

@@ -93,6 +93,7 @@ Cachegrind je alat za profilisanje performansi C/C++ programa, deo Valgrind pake
 
 ###  Rezultati primene na projekat
 
+![cachegrind_kcachegrind.png](/valgrind/cachegrind/cachegrind_kcachegrind.png)
 **1. Visok broj instrukcionih promašaja i memorijskih pristupa**
 - Funkcije `Board::operator()(int, int)` i `feasible(Board&, int, int, int)` imaju veliki broj pristupa memoriji. Svaka provera ili pristup elementu table generiše višestruke memorijske operacije, posebno u rekurzivnom pretraživanju svih mogućnosti.  
 
